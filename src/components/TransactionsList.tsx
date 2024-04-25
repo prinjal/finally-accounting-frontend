@@ -20,11 +20,18 @@ import axios from "axios";
 
 const drawerWidth = 240;
 
+interface Account {
+  id: number;
+  account_number: string;
+  current_balance: number;
+  user?: string; // Assuming user might be a username or ID
+}
+
 interface Transaction {
   id: number;
   date: string;
   transaction_type: string;
-  account: number;
+  account: Account;
   note: string;
   amount: number;
 }
@@ -33,6 +40,13 @@ const TransactionsList: React.FC = () => {
   const { accountNumber } = useParams<{ accountNumber: string }>();
   const location = useLocation();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  function maskAccountNumber(accountNumber: string) {
+    // Mask all but the last 4 digits of the account number
+    return (
+      accountNumber.slice(0, -4).replace(/./g, "*") + accountNumber.slice(-4)
+    );
+  }
 
   useEffect(() => {
     const url = accountNumber
@@ -115,7 +129,9 @@ const TransactionsList: React.FC = () => {
                   </TableCell>
                   <TableCell>{transaction.date}</TableCell>
                   <TableCell>{transaction.transaction_type}</TableCell>
-                  <TableCell>{transaction.account}</TableCell>
+                  <TableCell>
+                    {maskAccountNumber(transaction.account.account_number)}
+                  </TableCell>
                   <TableCell>{transaction.note}</TableCell>
                   <TableCell align="right">
                     {transaction.amount.toLocaleString(undefined, {
