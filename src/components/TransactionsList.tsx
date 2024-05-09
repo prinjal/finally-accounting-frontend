@@ -40,6 +40,9 @@ const TransactionsList: React.FC = () => {
   const { accountNumber } = useParams<{ accountNumber: string }>();
   const location = useLocation();
   const [transactions, setTransactions] = useState<Transaction[]>([]);
+  const [username, setUsername] = useState(
+    localStorage.getItem("username") || "username"
+  );
 
   function maskAccountNumber(accountNumber: string) {
     // Mask all but the last 4 digits of the account number
@@ -80,7 +83,7 @@ const TransactionsList: React.FC = () => {
         anchor="left"
       >
         <Typography variant="h6" sx={{ margin: 2 }}>
-          Hi, username!
+          Hi, {username}
         </Typography>
         <Divider />
         <List>
