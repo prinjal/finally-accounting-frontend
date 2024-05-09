@@ -27,6 +27,7 @@ interface Account {
 const AccountsList: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { username } = location.state || "username";
   const [accounts, setAccounts] = useState<Account[]>([]);
 
   useEffect(() => {
@@ -41,7 +42,6 @@ const AccountsList: React.FC = () => {
   };
 
   const isSelected = (path: string) => {
-    console.log(location.pathname);
     return location.pathname.includes(path);
   };
 
@@ -61,7 +61,7 @@ const AccountsList: React.FC = () => {
         anchor="left"
       >
         <Typography variant="h6" sx={{ margin: 2 }}>
-          Hi, username!
+          Hi, {username}
         </Typography>
         <Divider />
         <List>

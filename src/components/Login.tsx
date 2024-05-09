@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   Container,
   Paper,
@@ -14,11 +15,23 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Here you would normally handle authentication.
-    // This is just a placeholder to simulate successful login.
-    // After a successful login, you navigate to the accounts page.
-    navigate("api/accounts");
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
+        username: username,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        console.log("Login successful:", response.data);
+        // Optionally, store the token if returned and needed
+        // localStorage.setItem('token', response.data.token);
+        navigate("/api/accounts", { state: { username: username } }); // Redirect to accounts page on successful login
+      }
+    } catch (error) {
+      console.error("Failed to login", error);
+      alert("Login failed. Please check your credentials.");
+    }
   };
 
   return (
