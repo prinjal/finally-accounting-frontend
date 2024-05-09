@@ -27,9 +27,7 @@ interface Account {
 const AccountsList: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [username, setUsername] = useState(
-    localStorage.getItem("username") || "username"
-  );
+  const [username] = useState(localStorage.getItem("username") || "username");
   const [accounts, setAccounts] = useState<Account[]>([]);
 
   useEffect(() => {
