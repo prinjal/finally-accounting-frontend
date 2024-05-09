@@ -50,7 +50,7 @@ const TransactionsList: React.FC = () => {
 
   useEffect(() => {
     const url = accountNumber
-      ? `http://127.0.0.1:8000/api/transactions/${accountNumber}/`
+      ? `http://127.0.0.1:8000/api/accounts/${accountNumber}/transactions/`
       : `http://127.0.0.1:8000/api/transactions/`;
     axios
       .get(url)
