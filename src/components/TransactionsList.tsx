@@ -89,7 +89,10 @@ const TransactionsList: React.FC = () => {
             component={Link}
             to="/api/accounts"
             sx={{
-              backgroundColor: isSelected("/accounts") ? "#2196f3" : "inherit",
+              backgroundColor:
+                isSelected("accounts") && !isSelected("transactions")
+                  ? "#2196f3"
+                  : "inherit",
             }}
           >
             <ListItemText primary="Accounts" />

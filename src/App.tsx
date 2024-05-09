@@ -11,7 +11,7 @@ function App() {
         <Route path="api/accounts" element={<AccountsList />} />
         <Route path="api/transactions" element={<TransactionsList />} />
         <Route
-          path="api/transactions/:accountNumber/"
+          path="api/accounts/:accountNumber/transactions/"
           element={<TransactionsList />}
         />
       </Routes>

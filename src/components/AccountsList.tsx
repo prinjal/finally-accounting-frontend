@@ -37,10 +37,11 @@ const AccountsList: React.FC = () => {
   }, []);
 
   const handleViewTransactions = (accountId: number) => {
-    navigate(`/api/transactions/${accountId}`);
+    navigate(`/api/accounts/${accountId}/transactions/`);
   };
 
   const isSelected = (path: string) => {
+    console.log(location.pathname);
     return location.pathname.includes(path);
   };
 
@@ -67,9 +68,12 @@ const AccountsList: React.FC = () => {
           <ListItem
             button
             component={Link}
-            to="/api/accounts"
+            to="/api/accounts/"
             sx={{
-              backgroundColor: isSelected("accounts") ? "#2196f3" : "inherit",
+              backgroundColor:
+                isSelected("accounts") && !isSelected("transactions")
+                  ? "#2196f3"
+                  : "inherit",
             }}
           >
             <ListItemText primary="Accounts" />
@@ -77,7 +81,7 @@ const AccountsList: React.FC = () => {
           <ListItem
             button
             component={Link}
-            to="/api/transactions"
+            to="/api/transactions/"
             sx={{
               backgroundColor: isSelected("transactions")
                 ? "#2196f3"
