@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axiosInstance from "./axiosConfig";
 import {
   Box,
   Card,
@@ -14,7 +15,6 @@ import {
   Divider,
 } from "@mui/material";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 
 const drawerWidth = 240;
 
@@ -31,7 +31,7 @@ const AccountsList: React.FC = () => {
   const [accounts, setAccounts] = useState<Account[]>([]);
 
   useEffect(() => {
-    axios
+    axiosInstance
       .get("http://127.0.0.1:8000/api/accounts/")
       .then((response) => setAccounts(response.data))
       .catch((error) => console.error("Error fetching accounts:", error));

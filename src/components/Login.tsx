@@ -24,15 +24,14 @@ const Login: React.FC = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/login/", {
+      const response = await axios.post("http://127.0.0.1:8000/api/token", {
         username: username,
         password: password,
       });
 
       if (response.status === 200) {
         console.log("Login successful:", response.data);
-        // Optionally, store the token if returned and needed
-        // localStorage.setItem('token', response.data.token);
+        localStorage.setItem("token", response.data.access);
         localStorage.setItem("username", username);
         navigate("/api/accounts", { state: { username: username } }); // Redirect to accounts page on successful login
       }
